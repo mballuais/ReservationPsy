@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(node database/init.js:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)",
+      "Bash(fuser:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)"
+    ]
+  }
+}

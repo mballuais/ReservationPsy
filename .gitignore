@@ -1,0 +1,54 @@
+########################
+# Node.js
+########################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+########################
+# Environnement
+########################
+.env
+.env.local
+.env.development
+.env.production
+
+########################
+# Base de données
+########################
+backend/database/*.sqlite
+backend/database/*.db
+backend/database/*.sqlite3
+
+########################
+# Logs
+########################
+logs/
+*.log
+
+########################
+# OS / Éditeurs
+########################
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+########################
+# Build / Cache
+########################
+dist/
+build/
+.cache/
+
+########################
+# Tests
+########################
+coverage/
+
+########################
+# Sécurité
+########################
+*.pem
+*.key

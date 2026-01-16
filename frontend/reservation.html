@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prise de rendez-vous - Cabinet de psychologues</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <span class="logo-icon">&#9879;</span>
+                <span class="logo-text">Cabinet Psy Belvédère</span>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-btn active" onclick="showPage('home')">Accueil</button>
+                <button class="nav-btn" onclick="showPage('appointments')">Mes rendez-vous</button>
+                <button class="nav-btn" onclick="showPage('team')">Notre équipe</button>
+                <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+            </nav>
+            <div class="header-actions">
+                <button class="pro-btn" onclick="showPage('dashboard')">Espace Pro</button>
+                <button class="emergency-btn" onclick="showPage('emergency')">Urgence</button>
+            </div>
+        </div>
+    </header>
+    <main id="page-home" class="page container">
+        <section id="step-home" class="step active">
+            <h1>Prendre rendez-vous</h1>
+            <p class="subtitle">De la grossesse à la sortie de l'hôpital</p>
+            <div class="service-cards">
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=200&fit=crop" alt="Médecin">
+                    </div>
+                    <button class="service-btn">Médecin</button>
+                </div>
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=200&fit=crop" alt="Psychologue">
+                    </div>
+                    <button class="service-btn" onclick="selectService()">Psychologue</button>
+                </div>
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=300&h=200&fit=crop" alt="Gynécologue">
+                    </div>
+                    <button class="service-btn">Gynécologue</button>
+                </div>
+            </div>
+        </section>
+        <section id="step-psychologist" class="step">
+            <h2 class="section-title">Psychologue</h2>
+            <div class="button-grid">
+                <button class="choice-btn" onclick="selectPsychologist('Lemaire')">Madame Lemaire</button>
+                <button class="choice-btn" onclick="selectPsychologist('André')">Monsieur André</button>
+                <button class="choice-btn" onclick="selectPsychologist('Honoré')">Madame Honoré</button>
+                <button class="choice-btn" onclick="selectPsychologist('Garnier')">Madame Garnier</button>
+            </div>
+        </section>
+        <section id="step-type" class="step">
+            <p class="step-label" id="psychologist-name"></p>
+            <h2 class="section-title">Prise de rendez-vous</h2>
+            <div class="button-grid">
+                <button class="choice-btn" onclick="selectType('couple')">Rendez-vous en couple</button>
+                <button class="choice-btn" onclick="selectType('grossesse')">Rendez-vous femme enceinte</button>
+            </div>
+        </section>
+        <section id="step-first" class="step">
+            <p class="step-label" id="psychologist-name-2"></p>
+            <h2 class="section-title">Type de rendez-vous</h2>
+            <div class="button-grid">
+                <button class="choice-btn" onclick="selectFirstVisit(true)">Premier rendez-vous</button>
+                <button class="choice-btn" onclick="selectFirstVisit(false)">Rendez-vous de suivi</button>
+            </div>
+        </section>
+        <section id="step-date" class="step">
+            <p class="step-label" id="psychologist-name-3"></p>
+            <h2 class="section-title">Choisissez votre date<br>de rendez-vous</h2>
+            <div class="date-picker">
+                <input type="date" id="appointment-date" class="date-input" onchange="selectDate()">
+            </div>
+        </section>
+        <section id="step-time" class="step">
+            <p class="step-label" id="psychologist-name-4"></p>
+            <h2 class="section-title">Horaire du rendez-vous</h2>
+            <div class="contact-info">
+                <p><strong>Téléphone :</strong> <a href="tel:0577893245">05 77 89 32 45</a></p>
+                <p><strong>E-mail :</strong> <a href="mailto:secretariatpsy-garnier@belvedere.fr">secretariatpsy-garnier@belvedere.fr</a></p>
+                <p><strong>Horaires du secrétariat :</strong> du lundi au samedi de 8h30 à 12h30 et de 14h à 18h</p>
+            </div>
+            <div class="time-selection">
+                <div class="time-period">
+                    <h3>Matinée</h3>
+                    <div class="time-grid" id="morning-slots"></div>
+                </div>
+                <div class="time-period">
+                    <h3>Après-midi</h3>
+                    <div class="time-grid" id="afternoon-slots"></div>
+                </div>
+            </div>
+        </section>
+        <section id="step-patient" class="step">
+            <p class="step-label" id="psychologist-name-5"></p>
+            <h2 class="section-title">Vos informations</h2>
+            <form id="patient-form" class="patient-form">
+                <div class="form-group">
+                    <label for="patient-lastname">Nom *</label>
+                    <input type="text" id="patient-lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-firstname">Prénom *</label>
+                    <input type="text" id="patient-firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-email">Email *</label>
+                    <input type="email" id="patient-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-phone">Téléphone *</label>
+                    <input type="tel" id="patient-phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-notes">Motif de la consultation</label>
+                    <textarea id="patient-notes" name="notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Confirmer le rendez-vous</button>
+            </form>
+            <div id="booking-error" class="error-message" style="display: none;"></div>
+        </section>
+        <section id="step-confirmation" class="step">
+            <p class="step-label" id="psychologist-name-6"></p>
+            <h2 class="section-title">Vous avez rendez-vous !</h2>
+            <div class="confirmation-card">
+                <p class="confirmation-text">
+                    Vous avez rendez-vous <span id="confirm-type"></span> avec <span id="confirm-psychologist"></span>,
+                    psychologue le <span id="confirm-date"></span> à <span id="confirm-time"></span>.
+                </p>
+                <p class="confirmation-id">Référence : <span id="confirm-id"></span></p>
+            </div>
+            <div class="button-grid">
+                <button class="action-btn" onclick="cancelAppointment()">Annuler mon rendez-vous</button>
+                <button class="action-btn" onclick="resetBooking()">Prendre un autre rendez-vous</button>
+            </div>
+        </section>
+    </main>
+    <div id="page-appointments" class="page" style="display: none;">
+        <div class="container">
+            <section class="step active">
+                <h1>Mes rendez-vous</h1>
+                <p class="subtitle">Retrouvez et gérez vos rendez-vous</p>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="search-email">Votre adresse email</label>
+                        <input type="email" id="search-email" placeholder="exemple@email.com">
+                    </div>
+                    <button class="submit-btn" onclick="searchAppointments()">Rechercher mes rendez-vous</button>
+                </div>
+                <div id="appointments-list" class="appointments-list" style="display: none;">
+                    <h3>Vos rendez-vous</h3>
+                    <div id="appointments-container"></div>
+                </div>
+                <div id="no-appointments" class="no-results" style="display: none;">
+                    <p>Aucun rendez-vous trouvé pour cette adresse email.</p>
+                    <button class="choice-btn" onclick="showPage('home')">Prendre un rendez-vous</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="page-team" class="page" style="display: none;">
+        <div class="container">
+            <section class="step active">
+                <h1>Notre équipe</h1>
+                <p class="subtitle">Des professionnels à votre écoute</p>
+                <div id="team-grid" class="team-grid">
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="page-contact" class="page" style="display: none;">
+        <div class="container">
+            <section class="step active">
+                <h1>Contactez-nous</h1>
+                <p class="subtitle">Nous sommes à votre disposition</p>
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-icon">&#128222;</div>
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:0577893245">05 77 89 32 45</a></p>
+                        <p class="small">Du lundi au samedi<br>8h30 - 12h30 / 14h - 18h</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">&#9993;</div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:contact@cabinet-psy-belvedere.fr">contact@cabinet-psy-belvedere.fr</a></p>
+                        <p class="small">Réponse sous 48h</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">&#128205;</div>
+                        <h3>Adresse</h3>
+                        <p>12 rue du Belvédère<br>33000 Bordeaux</p>
+                        <p class="small">Parking disponible</p>
+                    </div>
+                </div>
+                <div class="contact-form-section">
+                    <h2 class="section-title">Envoyez-nous un message</h2>
+                    <form id="contact-form" class="patient-form" onsubmit="sendContactForm(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Nom complet *</label>
+                                <input type="text" id="contact-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email *</label>
+                                <input type="email" id="contact-email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Sujet *</label>
+                            <select id="contact-subject" required>
+                                <option value="">Choisir un sujet...</option>
+                                <option value="rdv">Question sur un rendez-vous</option>
+                                <option value="info">Demande d'information</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message *</label>
+                            <textarea id="contact-message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="page-emergency" class="page" style="display: none;">
+        <div class="container">
+            <section class="step active emergency-page">
+                <h1>En cas d'urgence</h1>
+                <p class="subtitle">Si vous êtes en détresse, appelez immédiatement</p>
+                <div class="emergency-cards">
+                    <div class="emergency-card red">
+                        <div class="emergency-number">15</div>
+                        <h3>SAMU</h3>
+                        <p>Urgences médicales</p>
+                        <a href="tel:15" class="emergency-call-btn">Appeler le 15</a>
+                    </div>
+                    <div class="emergency-card orange">
+                        <div class="emergency-number">3114</div>
+                        <h3>Numéro national de prévention du suicide</h3>
+                        <p>24h/24, 7j/7</p>
+                        <a href="tel:3114" class="emergency-call-btn">Appeler le 3114</a>
+                    </div>
+                    <div class="emergency-card blue">
+                        <div class="emergency-number">01 45 39 40 00</div>
+                        <h3>SOS Amitié</h3>
+                        <p>Écoute et soutien</p>
+                        <a href="tel:0145394000" class="emergency-call-btn">Appeler</a>
+                    </div>
+                </div>
+                <div class="emergency-info">
+                    <h3>Notre cabinet n'est pas un service d'urgence</h3>
+                    <p>Si vous traversez une crise, n'hésitez pas à contacter les numéros ci-dessus ou à vous rendre aux urgences les plus proches.</p>
+                    <p>Pour un rendez-vous non urgent avec l'un de nos psychologues :</p>
+                    <button class="choice-btn" onclick="showPage('home')">Prendre rendez-vous</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="page-dashboard" class="page" style="display: none;">
+        <div class="dashboard-container">
+            <div id="dashboard-login" class="dashboard-login">
+                <div class="login-card">
+                    <h1>Espace Professionnel</h1>
+                    <p class="subtitle">Connectez-vous pour accéder à votre planning</p>
+                    <div class="form-group">
+                        <label for="psy-select">Sélectionnez votre profil</label>
+                        <select id="psy-select">
+                            <option value="">Choisir...</option>
+                        </select>
+                    </div>
+                    <button class="submit-btn" onclick="loginDashboard()">Accéder au planning</button>
+                </div>
+            </div>
+            <div id="dashboard-main" class="dashboard-main" style="display: none;">
+                <div class="dashboard-header">
+                    <div class="dashboard-user">
+                        <div class="user-avatar" id="dashboard-avatar">M</div>
+                        <div class="user-info">
+                            <h2 id="dashboard-name">Dr. Nom</h2>
+                            <p>Psychologue</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat-today">0</span>
+                            <span class="stat-label">RDV aujourd'hui</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat-week">0</span>
+                            <span class="stat-label">Cette semaine</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat-month">0</span>
+                            <span class="stat-label">Ce mois</span>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="logoutDashboard()">Déconnexion</button>
+                </div>
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" onclick="switchDashboardTab('planning')">Planning</button>
+                    <button class="tab-btn" onclick="switchDashboardTab('horaires')">Mes horaires</button>
+                    <button class="tab-btn" onclick="switchDashboardTab('creneaux')">Créneaux RDV</button>
+                </div>
+                <div id="tab-planning" class="dashboard-content tab-content active">
+                    <div class="calendar-section">
+                        <div class="calendar-header">
+                            <button class="calendar-nav" onclick="changeMonth(-1)">&lt;</button>
+                            <h3 id="calendar-month-year">Janvier 2026</h3>
+                            <button class="calendar-nav" onclick="changeMonth(1)">&gt;</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-weekdays">
+                                <span>Lun</span>
+                                <span>Mar</span>
+                                <span>Mer</span>
+                                <span>Jeu</span>
+                                <span>Ven</span>
+                                <span>Sam</span>
+                                <span>Dim</span>
+                            </div>
+                            <div class="calendar-days" id="calendar-days">
+                            </div>
+                        </div>
+                        <div class="calendar-legend">
+                            <span class="legend-item"><span class="dot has-appointments"></span> RDV planifiés</span>
+                            <span class="legend-item"><span class="dot today"></span> Aujourd'hui</span>
+                        </div>
+                    </div>
+                    <div class="appointments-section">
+                        <div class="appointments-header">
+                            <h3>Rendez-vous du <span id="selected-date-display">--</span></h3>
+                            <span class="appointments-count" id="appointments-count">0 rendez-vous</span>
+                        </div>
+                        <div class="appointments-timeline" id="dashboard-appointments">
+                            <p class="no-appointments-msg">Sélectionnez une date dans le calendrier</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-horaires" class="tab-content" style="display: none;">
+                    <div class="settings-section">
+                        <h3>Mes horaires de travail</h3>
+                        <p class="settings-desc">Définissez vos jours et heures de travail</p>
+                        <div class="working-hours-form" id="working-hours-form">
+                        </div>
+                        <button class="submit-btn" onclick="saveWorkingHours()">Enregistrer les horaires</button>
+                    </div>
+                </div>
+                <div id="tab-creneaux" class="tab-content" style="display: none;">
+                    <div class="settings-section">
+                        <h3>Créneaux de rendez-vous</h3>
+                        <p class="settings-desc">Définissez les horaires disponibles pour chaque type de RDV</p>
+                        <div class="slots-tabs">
+                            <button class="slot-tab-btn active" onclick="switchSlotType('couple')">RDV Couple (1h)</button>
+                            <button class="slot-tab-btn" onclick="switchSlotType('grossesse')">RDV Grossesse (45min)</button>
+                        </div>
+                        <div class="slots-editor">
+                            <div class="current-slots" id="current-slots">
+                            </div>
+                            <div class="add-slot-form">
+                                <input type="time" id="new-slot-time" step="900">
+                                <button class="add-slot-btn" onclick="addSlot()">+ Ajouter</button>
+                            </div>
+                        </div>
+                        <button class="submit-btn" onclick="saveSlots()">Enregistrer les créneaux</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
