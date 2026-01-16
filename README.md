@@ -1,172 +1,33 @@
-📅 Application de prise de rendez-vous – Cabinet Psy Belvédère
-🧠 Description
+# 📅 Application de prise de rendez-vous – Cabinet Psy Belvédère
 
-Ce projet est une application web de prise de rendez-vous pour un cabinet de psychologues.
-Elle permet aux patients de réserver, consulter et annuler leurs rendez-vous en ligne, et aux professionnels d’accéder à un espace dédié pour gérer leur planning.
+Application web de prise de rendez-vous en ligne pour un cabinet de psychologues. Les patients peuvent réserver, consulter et annuler leurs rendez-vous, tandis que les professionnels disposent d’un espace dédié pour gérer leur planning. Le projet repose sur un frontend en HTML, CSS et JavaScript, ainsi qu’un backend avec une base de données.
 
-L’application repose sur :
+## Fonctionnalités
+Côté patient : choix du psychologue, sélection du type de rendez-vous, choix de la date et de l’horaire, saisie des informations personnelles, confirmation avec référence, consultation et annulation des rendez-vous via email.  
+Côté professionnel : accès à l’espace pro, visualisation du planning (jour, semaine, mois), gestion des créneaux et statistiques.
 
-un frontend en HTML / CSS / JavaScript
-
-un backend avec une base de données pour la gestion des rendez-vous, patients et professionnels.
-
-✨ Fonctionnalités
-👤 Côté patient
-
-Sélection d’un service (psychologue)
-
-Choix du professionnel
-
-Choix du type de rendez-vous
-
-Sélection de la date et de l’horaire
-
-Saisie des informations personnelles
-
-Confirmation avec référence de rendez-vous
-
-Consultation des rendez-vous via l’email
-
-Annulation d’un rendez-vous
-
-👩‍⚕️ Côté professionnel (Espace Pro)
-
-Connexion à l’espace professionnel
-
-Accès au planning
-
-Visualisation des rendez-vous :
-
-du jour
-
-de la semaine
-
-du mois
-
-Gestion des horaires et créneaux
-
-Tableau de bord avec statistiques
-
-📞 Pages informatives
-
-Accueil
-
-Notre équipe
-
-Contact (formulaire de contact)
-
-Page urgence avec numéros utiles
-
-🗂️ Structure du projet
-/project-root
-│
-├── reservation.html     # Page principale de l’application
-├── styles.css            # Styles CSS
-├── script.js             # Logique JavaScript (navigation, formulaires, API)
-│
-├── backend/              # Serveur backend
-│   ├── routes/           # Routes API (rendez-vous, patients, psy)
-│   ├── controllers/      # Logique métier
-│   ├── models/           # Modèles de données
-│   └── server.js         # Lancement du serveur
-│
-├── database/
-│   └── database.sql      # Schéma de la base de données
-│
+## Structure du projet
+reservationpsy/  
+├── frontend/ (reservation.html, styles.css, script.js)  
+├── backend/ (routes, services, database, server.js, package.json)  
 └── README.md
 
-🛠️ Technologies utilisées
-Frontend
+## Technologies
+Frontend : HTML5, CSS3, JavaScript (Vanilla)  
+Backend : Node.js, Express  
+Base de données : SQLite / MySQL / PostgreSQL  
+API REST avec fetch / AJAX
 
-HTML5
+## Installation
+git clone https://github.com/mballuais/ReservationPsy.git  
+cd reservationpsy  
 
-CSS3
+Backend :  
+cd backend  
+npm install  
+npm start  
 
-JavaScript (Vanilla)
+Frontend : ouvrir frontend/reservation.html dans un navigateur.
 
-Google Fonts (Inter)
-
-Backend (exemple)
-
-Node.js + Express (ou autre selon ton choix)
-
-API REST
-
-Gestion des requêtes AJAX / fetch
-
-Base de données
-
-MySQL / PostgreSQL / SQLite (au choix)
-
-Tables :
-
-patients
-
-psychologues
-
-rendez_vous
-
-disponibilites
-
-🗃️ Base de données (exemple de logique)
-
-Un patient peut avoir plusieurs rendez-vous
-
-Un psychologue a :
-
-des disponibilités
-
-plusieurs rendez-vous associés
-
-Chaque rendez-vous contient :
-
-date
-
-heure
-
-type
-
-patient
-
-psychologue
-
-statut (confirmé / annulé)
-
-🚀 Installation et lancement
-1. Cloner le projet
-git clone https://github.com/ton-repo/cabinet-psy.git
-cd cabinet-psy
-
-2. Lancer le backend
-cd backend
-npm install
-npm start
-
-3. Configurer la base de données
-
-Importer le fichier database.sql
-
-Configurer les accès DB dans le backend
-
-4. Lancer le frontend
-
-Ouvrir reservation.html dans un navigateur
-(ou via un serveur local)
-
-🔐 Sécurité & améliorations possibles
-
-Validation côté backend
-
-Authentification sécurisée pour l’espace pro
-
-Envoi d’emails de confirmation
-
-Gestion des conflits de créneaux
-
-Responsive mobile amélioré
-
-Déploiement (Docker, VPS, etc.)
-
-📌 Statut du projet
-
-🟡 En cours / Projet pédagogique
+## Statut
+Projet pédagogique – en cours de développement.
